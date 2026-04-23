@@ -87,7 +87,7 @@
     border-radius: 2px;
 }
 
-/* 响应式导航栏 */
+/* 响应式导航栏设计 */
 @media (max-width: 768px) {
     .hamburger {
         display: block;
