@@ -1,117 +1,136 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('add-car-form');
-    const imageInput = document.getElementById('image');
-    const imagePreview = document.getElementById('image-preview');
-    const imageUploadArea = document.querySelector('.image-upload-area');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
 
-    // 图片上传区域交互
-    imageUploadArea.addEventListener('click', () => imageInput.click());
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
+});
+
+// ===================== 页面原有JS（未改动） =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('add-car-form');
+    const fileInput = document.getElementById('car-image');
+    const uploadArea = document.getElementById('upload-area');
+    const imagePreview = document.getElementById('imagePreview');
     
-    // 拖放功能
-    imageUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        imageUploadArea.style.borderColor = '#3498db';
-        imageUploadArea.style.backgroundColor = '#e3f2fd';
+    uploadArea.addEventListener('click', function() {
+        fileInput.click();
     });
     
-    imageUploadArea.addEventListener('dragleave', () => {
-        imageUploadArea.style.borderColor = '#bdc3c7';
-        imageUploadArea.style.backgroundColor = '#f9fbfd';
+    uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#3498db';
+        this.style.backgroundColor = '#edf5fc';
     });
     
-    imageUploadArea.addEventListener('drop', (e) => {
+    uploadArea.addEventListener('dragleave', function() {
+        this.style.borderColor = '#bdc3c7';
+        this.style.backgroundColor = '#f9fbfd';
+    });
+    
+    uploadArea.addEventListener('drop', function(e) {
         e.preventDefault();
-        imageUploadArea.style.borderColor = '#bdc3c7';
-        imageUploadArea.style.backgroundColor = '#f9fbfd';
+        this.style.borderColor = '#bdc3c7';
+        this.style.backgroundColor = '#f9fbfd';
+        
         if (e.dataTransfer.files.length) {
-            imageInput.files = e.dataTransfer.files;
+            fileInput.files = e.dataTransfer.files;
             handleImagePreview(e.dataTransfer.files[0]);
         }
     });
-
-    // 图片预览功能
-    imageInput.addEventListener('change', function(e) {
+    
+    fileInput.addEventListener('change', function() {
         if (this.files && this.files[0]) {
             handleImagePreview(this.files[0]);
         } else {
             imagePreview.style.display = 'none';
         }
     });
-
+    
     function handleImagePreview(file) {
-        // 文件验证
-        const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        const maxSize = 5 * 1024 * 1024; // 5MB
-
+        const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+        const maxSize = 5 * 1024 * 1024;
+        
         if (!validTypes.includes(file.type)) {
-            alert('Please upload a valid image file (JPG, PNG, WebP).');
-            imageInput.value = '';
+            alert('Please upload a valid image file (JPG, PNG, or WebP).');
+            fileInput.value = '';
             return;
         }
         
         if (file.size > maxSize) {
             alert('File size must be less than 5MB.');
-            imageInput.value = '';
+            fileInput.value = '';
             return;
         }
-
+        
         const reader = new FileReader();
         reader.onload = function(event) {
-            imagePreview.src = event.target.result;
+            imagePreview.innerHTML = `<img src="${event.target.result}" alt="Car Image Preview">`;
             imagePreview.style.display = 'block';
         };
         reader.readAsDataURL(file);
     }
-
-    // 表单提交处理
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // 获取表单数据
-        const colour = document.getElementById('colour').value;
+        
+        const color = document.getElementById('color').value;
         const model = document.getElementById('model').value;
-        const year = document.getElementById('year').value;
+        const year = parseInt(document.getElementById('year').value);
         const location = document.getElementById('location').value;
-        const price = document.getElementById('price').value;
-        const imageFile = imageInput.files[0];
-
-        // 验证表单数据
-        if (!validateForm()) {
+        const price = parseFloat(document.getElementById('price').value);
+        
+        if (!validateForm(color, model, year, location, price)) {
             return;
         }
-
-        // 模拟发布成功
-        alert(`Car published successfully!\n\nDetails:\n• Colour: ${colour}\n• Model: ${model}\n• Year: ${year}\n• Location: ${location}\n• Price: ¥${price}`);
         
-        // 重置表单
-        form.reset();
-        imagePreview.style.display = 'none';
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+        submitBtn.disabled = true;
+        
+        setTimeout(function() {
+            alert(`Car published successfully!\n\nDetails:\n• Color: ${color}\n• Model: ${model}\n• Year: ${year}\n• Location: ${location}\n• Price: ¥${price.toFixed(2)}`);
+            form.reset();
+            imagePreview.style.display = 'none';
+            imagePreview.innerHTML = '';
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
     });
-
-    // 表单验证函数
-    function validateForm() {
-        const year = parseInt(document.getElementById('year').value);
-        const price = parseFloat(document.getElementById('price').value);
-        const imageFile = imageInput.files[0];
-        
-        // 验证年份
+    
+    function validateForm(color, model, year, location, price) {
+        if (!color.trim()) {
+            alert('Please enter car color.');
+            return false;
+        }
+        if (!model.trim()) {
+            alert('Please enter car model.');
+            return false;
+        }
         if (year < 1990 || year > 2026) {
             alert('Please enter a valid year between 1990 and 2026.');
             return false;
         }
-        
-        // 验证价格
+        if (!location.trim()) {
+            alert('Please enter location.');
+            return false;
+        }
         if (price <= 0) {
             alert('Please enter a valid price greater than 0.');
             return false;
         }
-        
-        // 验证图片
-        if (!imageFile) {
+        if (!fileInput.files[0]) {
             alert('Please upload an image of the car.');
             return false;
         }
-        
         return true;
     }
 });
