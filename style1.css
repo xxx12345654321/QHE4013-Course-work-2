@@ -28,12 +28,12 @@ ul {
     list-style: none;
 }
 
-/* 汽车横幅（明亮渐变，无暗沉黑灰） */
+/* 汽车横幅（缩小高度！） */
 .hero {
     background: linear-gradient(to right, #007bff, #28a745);
     background-size: cover;
     background-position: center;
-    height: 550px;
+    height: 400px; /* 缩小了高度，从550 → 400 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,10 +67,34 @@ ul {
     transform: translateY(-3px);
 }
 
-/* 业务简介区：纯白背景，清爽 */
+/* ========= 共用汽车背景图的大容器 ========= */
+/* 把 About + Quick Navigation 放在同一个背景里 */
+.car-bg-section {
+    background-image: url('carbackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* 可选：让背景更高级 */
+    position: relative;
+}
+
+/* 添加一层半透明遮罩，让文字更清晰 */
+.car-bg-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 1;
+}
+
+/* 业务简介区：使用汽车背景 */
 .about {
     padding: 80px 0;
-    background-color: #ffffff;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .about h2,
@@ -129,10 +153,12 @@ ul {
     color: #2c3e50;
 }
 
-/* 快捷导航区：浅蓝色背景，清爽 */
+/* 快捷导航区：使用同一张汽车背景 */
 .quick-links {
     padding: 80px 0;
-    background-color: #f8f9ff;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .link-cards {
