@@ -6,7 +6,7 @@
     <title>Search Cars - AutoMall</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 你指定的导航栏样式 */
+        /* 导航栏样式 */
         .navbar {
             background-color: #2c3e50;
             padding: 1rem 0;
@@ -95,7 +95,6 @@
             border-radius: 2px;
         }
 
-        /* 响应式导航栏 */
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
@@ -171,7 +170,6 @@
             list-style: none;
         }
 
-        /* 页面标题 */
         .page-header {
             background-color: #a9d4ff;
             padding: 40px 0;
@@ -192,7 +190,7 @@
             font-weight: 500;
         }
 
-        /* 搜索表单样式 */
+        /* 搜索表单 */
         .search-section {
             padding: 40px 0;
         }
@@ -307,12 +305,12 @@
         <div class="container">
             <form class="search-form" action="search-results.html" method="get">
                 <div class="form-group">
-                    <label for="model">Car Model</label>
-                    <input type="text" class="form-control" id="model" name="model" placeholder="e.g. BMW, Audi, Ford" required>
+                    <label for="model">Car Brand / Model (Optional)</label>
+                    <input type="text" class="form-control" id="model" name="model" placeholder="e.g. BMW, Audi, Ford">
                 </div>
                 <div class="form-group">
-                    <label for="year">Manufacture Year</label>
-                    <input type="number" class="form-control" id="year" name="year" placeholder="e.g. 2018, 2020" required>
+                    <label for="year">Manufacture Year (Optional)</label>
+                    <input type="number" class="form-control" id="year" name="year" placeholder="e.g. 2018, 2020">
                 </div>
                 <button type="submit" class="search-btn">Search Cars</button>
             </form>
@@ -331,7 +329,6 @@
 </footer>
 
 <script>
-    // 移动端菜单
     document.addEventListener('DOMContentLoaded', function() {
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
