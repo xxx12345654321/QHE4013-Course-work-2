@@ -33,7 +33,7 @@ ul {
     background: linear-gradient(to right, #007bff, #28a745);
     background-size: cover;
     background-position: center;
-    height: 400px; /* 缩小了高度，从550 → 400 */
+    height: 400px; /* 缩小了高度 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,17 +67,15 @@ ul {
     transform: translateY(-3px);
 }
 
-/* ========= 共用汽车背景图的大容器 ========= */
-/* 把 About + Quick Navigation 放在同一个背景里 */
+/* ========= 共用汽车背景图 ========= */
 .car-bg-section {
     background-image: url('carbackground.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 可选：让背景更高级 */
     position: relative;
 }
 
-/* 添加一层半透明遮罩，让文字更清晰 */
+/* 🔥 关键修改：降低遮罩透明度，让图片更清晰，同时文字依然可读 */
 .car-bg-section::before {
     content: '';
     position: absolute;
@@ -85,11 +83,11 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.55); /* 从 0.65 → 0.55，图片更清晰 */
     z-index: 1;
 }
 
-/* 业务简介区：使用汽车背景 */
+/* 业务简介区 */
 .about {
     padding: 80px 0;
     background-color: transparent;
@@ -118,17 +116,21 @@ ul {
     transform: translateX(-50%);
 }
 
+/* 🔥 关键修改：增大左右两栏间距，让内容更舒展 */
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 60px; /* 从 40px → 60px，左右更分开 */
     align-items: center;
 }
 
+/* 🔥 关键修改：增强文字对比度，让字体更清晰 */
 .about-text p {
-    font-size: 1.05rem;
+    font-size: 1.2rem; /* 字体稍微放大 */
     margin-bottom: 15px;
-    color: #34495e;
+    color: #0b0b0b; /* 文字颜色加深，对比度更高 */
+    font-weight: 700; /* 字体加粗一点 */
+    text-shadow: 0 0 2px rgba(255,255,255,0.6); /* 加轻微文字阴影，防止被背景干扰 */
 }
 
 .about-features {
@@ -150,10 +152,11 @@ ul {
 
 .feature h3 {
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: #282222; /* 加深文字颜色 */
+    font-weight: 600; /* 加粗标题 */
 }
 
-/* 快捷导航区：使用同一张汽车背景 */
+/* 快捷导航区 */
 .quick-links {
     padding: 80px 0;
     background-color: transparent;
@@ -238,6 +241,7 @@ footer {
 @media (max-width: 992px) {
     .about-content {
         grid-template-columns: 1fr;
+        gap: 40px; /* 移动端恢复合适间距 */
     }
     .link-cards {
         grid-template-columns: 1fr 1fr;
