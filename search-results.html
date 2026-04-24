@@ -6,7 +6,7 @@
     <title>Search Results - AutoMall</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* 你指定的导航栏样式 */
+        /* 导航栏 */
         .navbar {
             background-color: #2c3e50;
             padding: 1rem 0;
@@ -95,12 +95,10 @@
             border-radius: 2px;
         }
 
-        /* 响应式导航栏 */
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
             }
-
             .nav-menu {
                 position: fixed;
                 left: -100%;
@@ -112,66 +110,22 @@
                 transition: 0.3s;
                 padding: 2rem 0;
                 gap: 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .nav-menu li {
-                margin: 1rem 0;
-            }
-
-            .nav-menu li a {
-                padding: 1rem;
-                justify-content: center;
-            }
-
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
+            .nav-menu.active { left: 0; }
+            .nav-menu li { margin: 1rem 0; }
+            .nav-menu li a { padding: 1rem; justify-content: center; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* 全局 */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { line-height: 1.6; color: #2c3e50; background-color: #a3d6df; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
 
-        body {
-            line-height: 1.6;
-            color: #2c3e50;
-            background-color: #a3d6df;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* 页面标题 */
         .page-header {
             background-color: #a9d4ff;
             padding: 40px 0;
@@ -179,143 +133,30 @@
             margin-bottom: 30px;
             border-bottom: 1px solid #dee2e6;
         }
+        .page-header h1 { font-size: 2.2rem; color: #1d3557; margin-bottom: 8px; }
+        .page-header p { color: #8c83ea; font-size: 1.5rem; font-weight: 500; }
 
-        .page-header h1 {
-            font-size: 2.2rem;
-            color: #1d3557;
-            margin-bottom: 8px;
-        }
+        /* 车辆卡片 */
+        .marketplace { padding: 30px 0 60px; }
+        .cars-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .car-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .car-card:hover { transform: translateY(-4px); }
+        .car-image img { width: 100%; height: 180px; object-fit: cover; }
+        .car-info { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .car-info h3 { font-size: 1.3rem; color: #1d3557; margin-bottom: 10px; font-weight: 600; }
+        .car-meta { font-size: 0.95rem; color: #555; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .car-price { font-size: 1.5rem; font-weight: bold; color: #e63946; margin: 10px 0 12px; }
+        .car-btn { display: inline-block; padding: 10px 20px; background-color: #1d3557; color: white; border-radius: 6px; font-size: 0.95rem; text-align: center; }
+        .car-btn:hover { background-color: #e63946; }
 
-        .page-header p {
-            color: #8c83ea;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
+        /* 无结果 */
+        .no-results { text-align: center; padding: 60px 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .no-results h3 { color: #e63946; margin-bottom: 15px; }
+        .back-btn { display: inline-block; padding: 10px 20px; background: #1d3557; color: white; border-radius: 6px; margin-top: 15px; }
 
-        /* 车辆卡片网格 */
-        .marketplace {
-            padding: 30px 0 60px;
-        }
-
-        .cars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .car-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .car-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .car-image img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .car-info {
-            padding: 18px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .car-info h3 {
-            font-size: 1.3rem;
-            color: #1d3557;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .car-meta {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            line-height: 1.5;
-        }
-
-        .car-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #e63946;
-            margin: 10px 0 12px;
-        }
-
-        .car-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #1d3557;
-            color: white;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .car-btn:hover {
-            background-color: #e63946;
-        }
-
-        /* 无结果提示 */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .no-results h3 {
-            color: #e63946;
-            margin-bottom: 15px;
-        }
-
-        .back-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #1d3557;
-            color: white;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-
-        /* 页脚 */
-        footer {
-            background-color: #007bff;
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .footer-logo i {
-            color: #ff3a3a;
-        }
+        footer { background-color: #007bff; color: white; padding: 30px 0; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.5rem; font-weight: bold; margin-bottom: 12px; }
+        .footer-logo i { color: #ff3a3a; }
     </style>
 </head>
 <body>
@@ -357,46 +198,9 @@
 
     <section class="marketplace">
         <div class="container">
-            <div class="cars-grid">
-                <!-- 搜索结果车辆卡片（和marketplace完全一致） -->
-                <div class="car-card">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d38" alt="White BMW">
-                    </div>
-                    <div class="car-info">
-                        <h3>BMW 3 Series</h3>
-                        <p class="car-meta"><i class="fas fa-palette"></i> Color: White</p>
-                        <p class="car-meta"><i class="fas fa-car"></i> Body: Sedan</p>
-                        <p class="car-meta"><i class="fas fa-calendar"></i> Year: 2018</p>
-                        <p class="car-meta"><i class="fas fa-map-marker-alt"></i> Location: London</p>
-                        <p class="car-price">£18,990</p>
-                        <a href="#" class="car-btn">View Details</a>
-                    </div>
-                </div>
-
-                <div class="car-card">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1549317467-8142a1e9983938" alt="Black Audi">
-                    </div>
-                    <div class="car-info">
-                        <h3>Audi A4</h3>
-                        <p class="car-meta"><i class="fas fa-palette"></i> Color: Black</p>
-                        <p class="car-meta"><i class="fas fa-car"></i> Body: Sedan</p>
-                        <p class="car-meta"><i class="fas fa-calendar"></i> Year: 2019</p>
-                        <p class="car-meta"><i class="fas fa-map-marker-alt"></i> Location: Manchester</p>
-                        <p class="car-price">£21,450</p>
-                        <a href="#" class="car-btn">View Details</a>
-                    </div>
-                </div>
+            <div class="cars-grid" id="resultsGrid">
+                <!-- 所有车辆（JS自动筛选） -->
             </div>
-
-            <!-- 无搜索结果时显示（可自行取消注释）
-            <div class="no-results">
-                <h3>No cars found matching your search</h3>
-                <p>Please try different keywords or browse all cars</p>
-                <a href="search.html" class="back-btn">Back to Search</a>
-            </div>
-            -->
         </div>
     </section>
 </main>
@@ -412,16 +216,91 @@
 </footer>
 
 <script>
+    // 车辆数据
+    const allCars = [
+        {
+            name: "BMW 3 Series", year: "2018", color: "White", body: "Sedan",
+            location: "London", price: "£18,990",
+            img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d38"
+        },
+        {
+            name: "Audi A4", year: "2019", color: "Black", body: "Sedan",
+            location: "Manchester", price: "£21,450",
+            img: "https://images.unsplash.com/photo-1549317467-8142a1e9983938"
+        },
+        {
+            name: "Ford Focus", year: "2020", color: "Blue", body: "Hatchback",
+            location: "Birmingham", price: "£14,250",
+            img: "https://images.unsplash.com/photo-1551224271-c2192e628f3486"
+        },
+        {
+            name: "Mercedes C-Class", year: "2017", color: "Silver", body: "Sedan",
+            location: "Liverpool", price: "£19,990",
+            img: "https://images.unsplash.com/photo-1580256989886-abc751e3123159"
+        },
+        {
+            name: "Volkswagen Golf", year: "2021", color: "Grey", body: "Hatchback",
+            location: "Leeds", price: "£16,750",
+            img: "https://images.unsplash.com/photo-1524351199678-941a58a3df50e5"
+        },
+        {
+            name: "Toyota Corolla", year: "2022", color: "Red", body: "Sedan",
+            location: "Sheffield", price: "£19,200",
+            img: "https://images.unsplash.com/photo-1617598256684-6296051106f3a2"
+        }
+    ];
+
+    // 获取搜索参数
+    const params = new URLSearchParams(window.location.search);
+    const searchModel = (params.get('model') || '').toLowerCase().trim();
+    const searchYear = (params.get('year') || '').trim();
+
+    // 筛选逻辑
+    const filteredCars = allCars.filter(car => {
+        const matchesModel = !searchModel || car.name.toLowerCase().includes(searchModel);
+        const matchesYear = !searchYear || car.year === searchYear;
+        return matchesModel && matchesYear;
+    });
+
+    // 渲染结果
+    const grid = document.getElementById('resultsGrid');
+    if (filteredCars.length === 0) {
+        grid.innerHTML = `
+            <div class="no-results">
+                <h3>No cars found matching your search</h3>
+                <p>Try different keywords or leave blank to show all</p>
+                <a href="search.html" class="back-btn">Back to Search</a>
+            </div>
+        `;
+    } else {
+        filteredCars.forEach(car => {
+            grid.innerHTML += `
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="${car.img}" alt="${car.name}">
+                    </div>
+                    <div class="car-info">
+                        <h3>${car.name}</h3>
+                        <p class="car-meta"><i class="fas fa-palette"></i> Color: ${car.color}</p>
+                        <p class="car-meta"><i class="fas fa-car"></i> Body: ${car.body}</p>
+                        <p class="car-meta"><i class="fas fa-calendar"></i> Year: ${car.year}</p>
+                        <p class="car-meta"><i class="fas fa-map-marker-alt"></i> Location: ${car.location}</p>
+                        <p class="car-price">${car.price}</p>
+                        <a href="#" class="car-btn">View Details</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     // 移动端菜单
     document.addEventListener('DOMContentLoaded', function() {
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
-
         document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
