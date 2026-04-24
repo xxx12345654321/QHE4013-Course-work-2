@@ -1,0 +1,147 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 页面顶部标题 */
+.page-header {
+    background-color: #f5f7fa;
+    padding: 50px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    color: #1d3557;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* 车辆卡片网格 */
+.marketplace {
+    padding: 40px 0 80px;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* 车辆卡片 */
+.car-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+}
+
+.car-image img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.car-info {
+    padding: 20px;
+}
+
+.car-info h3 {
+    font-size: 1.25rem;
+    color: #1d3557;
+    margin-bottom: 12px;
+}
+
+.car-meta {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.car-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #e63946;
+    margin: 12px 0 16px;
+}
+
+.car-btn {
+    display: inline-block;
+    padding: 9px 18px;
+    background-color: #1d3557;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.car-btn:hover {
+    background-color: #e63946;
+}
+
+/* 页脚 */
+footer {
+    background-color: #007bff;
+    color: white;
+    padding: 35px 0;
+    text-align: center;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-logo i {
+    color: #ff3a3a;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .cars-grid {
+        grid-template-columns: 1fr;
+    }
+}
