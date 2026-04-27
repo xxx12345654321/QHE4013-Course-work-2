@@ -1,0 +1,259 @@
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 页面整体背景：纯白色 + 浅蓝色，页面明亮干净 */
+body {
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 汽车横幅（缩小高度！） */
+.hero {
+    background: linear-gradient(to right, #007bff, #28a745);
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* 缩小了高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #1d78ce;
+    color: white;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #2ab39c;
+    transform: translateY(-3px);
+}
+
+/* ========= 共用汽车背景图 ========= */
+.car-bg-section {
+    background-image: url('carbackground.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* 🔥 关键修改：降低遮罩透明度，让图片更清晰，同时文字依然可读 */
+.car-bg-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.55); /* 从 0.65 → 0.55，图片更清晰 */
+    z-index: 1;
+}
+
+/* 业务简介区 */
+.about {
+    padding: 80px 0;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.about h2,
+.quick-links h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: #007bff;
+    position: relative;
+}
+
+.about h2::after,
+.quick-links h2::after {
+    content: '';
+    width: 80px;
+    height: 3px;
+    background-color: #28a745;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 🔥 关键修改：增大左右两栏间距，让内容更舒展 */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px; /* 从 40px → 60px，左右更分开 */
+    align-items: center;
+}
+
+/* 🔥 关键修改：增强文字对比度，让字体更清晰 */
+.about-text p {
+    font-size: 1.2rem; /* 字体稍微放大 */
+    margin-bottom: 15px;
+    color: #0b0b0b; /* 文字颜色加深，对比度更高 */
+    font-weight: 700; /* 字体加粗一点 */
+    text-shadow: 0 0 2px rgba(255,255,255,0.6); /* 加轻微文字阴影，防止被背景干扰 */
+}
+
+.about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature i {
+    font-size: 2rem;
+    color: #28a745;
+}
+
+.feature h3 {
+    font-size: 1.2rem;
+    color: #282222; /* 加深文字颜色 */
+    font-weight: 600; /* 加粗标题 */
+}
+
+/* 快捷导航区 */
+.quick-links {
+    padding: 80px 0;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.link-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.link-card {
+    background-color: white;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 123, 255, 0.1);
+    transition: 0.3s ease;
+}
+
+.link-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.15);
+}
+
+.link-card i {
+    font-size: 2.8rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.link-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.link-card p {
+    color: #7f8c8d;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.small-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.small-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 页脚：清爽蓝色 */
+footer {
+    background-color: #007bff;
+    color: white;
+    padding: 35px 0;
+    text-align: center;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-logo i {
+    color: #f3f3f3;
+}
+
+/* 响应式 */
+@media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px; /* 移动端恢复合适间距 */
+    }
+    .link-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .link-cards {
+        grid-template-columns: 1fr;
+    }
+}

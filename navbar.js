@@ -1,4 +1,4 @@
-// 移动端菜单切换
+// 移动端菜单切换设计
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
